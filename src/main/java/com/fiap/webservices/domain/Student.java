@@ -1,9 +1,6 @@
 package com.fiap.webservices.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,9 +19,12 @@ public class Student {
     private Parent parent;
 
     @NotBlank(message = "Nome obrigatório!")
-    @Size(max = 50)
+    @Size(max = 150)
     private String name;
+    @NotBlank(message = "CPF obrigatório!")
+    @Size(max = 11)
     private String cpf;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
 
     public Student(Parent parent, String name, String cpf, LocalDate dateOfBirth) {

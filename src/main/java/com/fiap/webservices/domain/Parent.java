@@ -1,9 +1,12 @@
 package com.fiap.webservices.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -16,14 +19,34 @@ public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parent")
     private int parentId;
+    @NotBlank(message = "Nome obrigatório!")
+    @Size(max = 150)
     private String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
+    @NotBlank(message = "CPF obrigatório!")
+    @Size(max = 11)
     private String cpf;
     private String phoneNumber;
+    @NotBlank(message = "Email obrigatório!")
+    @Size(max = 100)
     private String email;
     @OneToMany(mappedBy = "parent")
     @JsonManagedReference
     private List<Student> students = new ArrayList<>();
+
+    public Parent(String name, LocalDate dateOfBirth, String cpf, String phoneNumber, String email, List<Student> students) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.cpf = cpf;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.students = students;
+    }
+
+    public Parent() {
+
+    }
 
     public List<Student> getStudents() {
         return students;
