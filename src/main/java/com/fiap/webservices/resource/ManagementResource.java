@@ -3,6 +3,7 @@ package com.fiap.webservices.resource;
 import com.fiap.webservices.domain.Management;
 import com.fiap.webservices.service.impl.ManagementServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

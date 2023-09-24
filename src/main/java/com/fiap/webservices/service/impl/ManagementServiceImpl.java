@@ -6,6 +6,7 @@ import com.fiap.webservices.service.ManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 
 @Service
@@ -81,7 +82,8 @@ public class ManagementServiceImpl implements ManagementService {
             return 0.0;
         }
 
-        return (double) totalGrades / numberOfGrades;
+        Double result = (double) totalGrades / numberOfGrades;
+        return formatResult(result);
     }
     public double calculateClassroomAverageGrade() {
         Collection<Management> allStudentGrades = managementRepository.findAll();
@@ -116,10 +118,14 @@ public class ManagementServiceImpl implements ManagementService {
             return 0.0;
         }
 
-        return (double) sumGrades / (numberOfStudentsWithGrade * 3);
+        Double result = (double) sumGrades / (numberOfStudentsWithGrade * 3);
+        return formatResult(result);
     }
 
-
+    public Double formatResult(Double result) {
+        String format = String.format("%.2f", result).replace(",", ".");
+        return Double.parseDouble(format);
+    }
 
     @Override
     public void deleteManagement(int id) {
