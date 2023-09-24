@@ -1,14 +1,13 @@
 package com.fiap.webservices.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
-@SequenceGenerator(name = "stgrades_sequence", sequenceName = "SQ_STGRADES", allocationSize = 1)
-public class StudentGrades {
+@SequenceGenerator(name = "management_sequence", sequenceName = "SQ_MANAGEMENT", allocationSize = 1)
+public class Management {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stgrades_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "management_sequence")
     private int idStudentGrades;
     private Integer portugueseGrade;
     private Integer mathGrade;
@@ -16,14 +15,14 @@ public class StudentGrades {
     @OneToOne
     private Student student;
 
-    public StudentGrades(Integer portugueseGrade, Integer mathGrade, Integer englishGrade, Student student) {
+    public Management(Integer portugueseGrade, Integer mathGrade, Integer englishGrade, Student student) {
         this.portugueseGrade = portugueseGrade;
         this.mathGrade = mathGrade;
         this.englishGrade = englishGrade;
         this.student = student;
     }
 
-    public StudentGrades() {
+    public Management() {
 
     }
 

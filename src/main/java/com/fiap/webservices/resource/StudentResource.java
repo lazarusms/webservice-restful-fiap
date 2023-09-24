@@ -1,9 +1,7 @@
 package com.fiap.webservices.resource;
 
 import com.fiap.webservices.domain.Student;
-import com.fiap.webservices.domain.StudentGrades;
 import com.fiap.webservices.service.impl.StudentServiceImpl;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
