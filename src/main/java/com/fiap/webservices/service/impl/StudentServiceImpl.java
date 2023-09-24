@@ -8,8 +8,10 @@ import com.fiap.webservices.service.StudentService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -40,10 +42,23 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudentById(int id) {
         return studentRepository.findById(id).get();
     }
-
     @Override
-    public Student update(int id, Student student) {
-        return null;
+    public Student update(int id, Student updateStudent) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException("Student does not existe"));
+        updateName(student, updateStudent.getName());
+        updateDateOfBirth(student, updateStudent.getDateOfBirth());
+        return student;
+    }
+    public void updateName(Student student, String name) {
+        if (name != null && !name.equals(student.getName())) {
+            student.setName(name);
+        }
+    }
+
+    public void updateDateOfBirth(Student student, LocalDate dob) {
+        if(dob != null && !dob.equals(student.getDateOfBirth())) {
+            student.setDateOfBirth(dob);
+        }
     }
 
     @Override

@@ -42,7 +42,7 @@ public class ParentResource {
         return ResponseEntity.ok("O tutor informado foi deletado com sucesso");
     }
     @PutMapping(path = "/{parentId}")
-    public ResponseEntity<Parent> clientUpdate(
+    public ResponseEntity<Parent> parentUpdate(
             @PathVariable("parentId") int parentId,
             @RequestBody Parent updatedParent) {
         Parent updated = parentService.update(parentId, updatedParent);
